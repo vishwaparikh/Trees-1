@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return valid(root, null,null);
+    }
+    
+    private boolean valid(TreeNode node , Integer low, Integer high){
+        
+        //check null;
+        if(node==null)
+            return true;
+        
+        //check node value and its null
+        
+        if((low!=null && node.val <=low) || (high!=null && node.val>=high))
+            return false;
+        
+        //check both left and right are valid subtree
+        
+        return valid(node.left,low,node.val) && valid(node.right, node.val,high);
+    }
+}
+
+//time :O(n) -- recur all elements which si called as node
+//space: O(n) -- recursion uses stack and it takes O(n) space for n nodes
